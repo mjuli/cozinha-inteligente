@@ -1,5 +1,7 @@
 package br.com.fiap.cozinha_inteligente.controllers;
 
+import br.com.fiap.cozinha_inteligente.commons.ApiResponse;
+import br.com.fiap.cozinha_inteligente.controllers.interfaces.AuthenticationControllerInterface;
 import br.com.fiap.cozinha_inteligente.dtos.AuthenticationDataDTO;
 import br.com.fiap.cozinha_inteligente.dtos.TokenJWTDataDTO;
 import br.com.fiap.cozinha_inteligente.entities.User;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/login")
-public class AuthenticationController {
+public class AuthenticationController implements AuthenticationControllerInterface {
 
   private final AuthenticationManager manager;
 
@@ -30,17 +32,24 @@ public class AuthenticationController {
   }
 
   @PostMapping
-  public ResponseEntity login(@RequestBody @Valid AuthenticationDataDTO data) {
+  public ResponseEntity<ApiResponse<TokenJWTDataDTO>> login(@RequestBody @Valid AuthenticationDataDTO data) {
     try {
       var authenticationToken = new UsernamePasswordAuthenticationToken(data.login(), data.password());
       Authentication authentication = manager.authenticate(authenticationToken);
 
       String tokenJWT = tokenService.getToken((User) authentication.getPrincipal());
 
-      return ResponseEntity.ok(new TokenJWTDataDTO(tokenJWT));
+      ApiResponse<TokenJWTDataDTO> response = new ApiResponse<>(
+              "sucesso", "Login realizado com sucesso", new TokenJWTDataDTO(tokenJWT), null);
+
+      return ResponseEntity.ok(response);
     } catch (Exception e) {
       log.error("Erro ao realizar login({}): ", data.login(), e);
-      return ResponseEntity.badRequest().body(e.getMessage());
+
+      ApiResponse<TokenJWTDataDTO> response = new ApiResponse<>(
+              "erro", "Falha ao realizar login", null, e.getMessage());
+
+      return ResponseEntity.badRequest().body(response);
     }
   }
 }

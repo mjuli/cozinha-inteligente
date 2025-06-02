@@ -1,6 +1,7 @@
 package br.com.fiap.cozinha_inteligente.controllers;
 
 import br.com.fiap.cozinha_inteligente.commons.ApiResponse;
+import br.com.fiap.cozinha_inteligente.controllers.interfaces.UserControllerInterface;
 import br.com.fiap.cozinha_inteligente.dtos.UpdatePasswordRequestDTO;
 import br.com.fiap.cozinha_inteligente.dtos.UserInfoDTO;
 import br.com.fiap.cozinha_inteligente.dtos.UserRequestDTO;
@@ -20,7 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UserController implements UserControllerInterface {
 
   private final UserService userService;
 
@@ -60,7 +61,7 @@ public class UserController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<ApiResponse<UserInfoDTO>> update(@RequestBody UserRequestDTO user, @PathVariable String id) {
+  public ResponseEntity<ApiResponse<UserInfoDTO>> update(@RequestBody @Valid UserRequestDTO user, @PathVariable String id) {
     try {
       User userUpdated = userService.update(id, user);
 
