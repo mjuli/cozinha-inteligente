@@ -1,0 +1,42 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-cozinha-inteligente
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: cozinha-inteligente
+      MYSQL_USER: usr-cozinha-inteligente
+      MYSQL_PASSWORD: 69~3Qgps+11
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  app:
+    image: openjdk:21-jdk-slim
+    container_name: cozinha-inteligente-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cozinha-inteligente
+      SPRING_DATASOURCE_USERNAME: usr-cozinha-inteligente
+      SPRING_DATASOURCE_PASSWORD: 69~3Qgps+11
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      - ./target/cozinha-inteligente-0.0.1-SNAPSHOT.jar:/app/app.jar
+    working_dir: /app
+    command: ["java", "-jar", "app.jar"]
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:

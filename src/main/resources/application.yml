@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: cozinha-inteligente
+  datasource:
+    url: jdbc:mysql://localhost:3306/cozinha-inteligente
+    username: usr-cozinha-inteligente
+    password: 69~3Qgps+11
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    br.com.fiap.cozinha_inteligente.controllers: INFO
+    br.com.fiap.cozinha_inteligente.service: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:123654789}
