@@ -1,5 +1,6 @@
 package br.com.fiap.cozinha_inteligente.controllers.interfaces;
 
+import br.com.fiap.cozinha_inteligente.commons.ResponseApi;
 import br.com.fiap.cozinha_inteligente.dtos.AuthenticationDataDTO;
 import br.com.fiap.cozinha_inteligente.dtos.TokenJWTDataDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,5 +58,5 @@ public interface AuthenticationControllerInterface {
                   )
           }
   )
-  ResponseEntity<br.com.fiap.cozinha_inteligente.commons.ApiResponse<TokenJWTDataDTO>> login(AuthenticationDataDTO data);
+  ResponseEntity<ResponseApi<TokenJWTDataDTO>> login(AuthenticationDataDTO data);
 }

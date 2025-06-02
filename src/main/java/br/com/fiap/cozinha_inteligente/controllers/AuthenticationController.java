@@ -1,6 +1,6 @@
 package br.com.fiap.cozinha_inteligente.controllers;
 
-import br.com.fiap.cozinha_inteligente.commons.ApiResponse;
+import br.com.fiap.cozinha_inteligente.commons.ResponseApi;
 import br.com.fiap.cozinha_inteligente.controllers.interfaces.AuthenticationControllerInterface;
 import br.com.fiap.cozinha_inteligente.dtos.AuthenticationDataDTO;
 import br.com.fiap.cozinha_inteligente.dtos.TokenJWTDataDTO;
@@ -32,21 +32,21 @@ public class AuthenticationController implements AuthenticationControllerInterfa
   }
 
   @PostMapping
-  public ResponseEntity<ApiResponse<TokenJWTDataDTO>> login(@RequestBody @Valid AuthenticationDataDTO data) {
+  public ResponseEntity<ResponseApi<TokenJWTDataDTO>> login(@RequestBody @Valid AuthenticationDataDTO data) {
     try {
       var authenticationToken = new UsernamePasswordAuthenticationToken(data.login(), data.password());
       Authentication authentication = manager.authenticate(authenticationToken);
 
       String tokenJWT = tokenService.getToken((User) authentication.getPrincipal());
 
-      ApiResponse<TokenJWTDataDTO> response = new ApiResponse<>(
+      ResponseApi<TokenJWTDataDTO> response = new ResponseApi<>(
               "sucesso", "Login realizado com sucesso", new TokenJWTDataDTO(tokenJWT), null);
 
       return ResponseEntity.ok(response);
     } catch (Exception e) {
       log.error("Erro ao realizar login({}): ", data.login(), e);
 
-      ApiResponse<TokenJWTDataDTO> response = new ApiResponse<>(
+      ResponseApi<TokenJWTDataDTO> response = new ResponseApi<>(
               "erro", "Falha ao realizar login", null, e.getMessage());
 
       return ResponseEntity.badRequest().body(response);

@@ -1,5 +1,6 @@
 package br.com.fiap.cozinha_inteligente.controllers.interfaces;
 
+import br.com.fiap.cozinha_inteligente.commons.ResponseApi;
 import br.com.fiap.cozinha_inteligente.dtos.UpdatePasswordRequestDTO;
 import br.com.fiap.cozinha_inteligente.dtos.UserInfoDTO;
 import br.com.fiap.cozinha_inteligente.dtos.UserRequestDTO;
@@ -23,7 +24,7 @@ public interface UserControllerInterface {
                           responseCode = "201",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class),
+                                  schema = @Schema(implementation = ResponseApi.class),
                                   examples = @ExampleObject(
                                           name = "Sucesso",
                                           value = """
@@ -53,7 +54,7 @@ public interface UserControllerInterface {
                           responseCode = "400",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class),
+                                  schema = @Schema(implementation = ResponseApi.class),
                                   examples = @ExampleObject(
                                           name = "Usuário duplicado",
                                           value = """
@@ -72,12 +73,12 @@ public interface UserControllerInterface {
                           responseCode = "500",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class)
+                                  schema = @Schema(implementation = ResponseApi.class)
                           )
                   )
           }
   )
-  ResponseEntity<br.com.fiap.cozinha_inteligente.commons.ApiResponse<UserInfoDTO>> create(UserRequestDTO user, UriComponentsBuilder uriBuilder);
+  ResponseEntity<ResponseApi<UserInfoDTO>> create(UserRequestDTO user, UriComponentsBuilder uriBuilder);
 
   @Operation(
           description = "Atualiza os dados de um usuário existente",
@@ -89,7 +90,7 @@ public interface UserControllerInterface {
                           responseCode = "200",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class),
+                                  schema = @Schema(implementation = ResponseApi.class),
                                   examples = @ExampleObject(
                                           name = "Sucesso",
                                           value = """
@@ -125,7 +126,7 @@ public interface UserControllerInterface {
                           responseCode = "404",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class),
+                                  schema = @Schema(implementation = ResponseApi.class),
                                   examples = @ExampleObject(
                                           name = "Usuário não encontrado",
                                           value = """
@@ -149,7 +150,7 @@ public interface UserControllerInterface {
                   )
           }
   )
-  ResponseEntity<br.com.fiap.cozinha_inteligente.commons.ApiResponse<UserInfoDTO>> update(UserRequestDTO user, String id);
+  ResponseEntity<ResponseApi<UserInfoDTO>> update(UserRequestDTO user, String id);
 
   @Operation(
           description = "Remove um usuário do sistema",
@@ -161,7 +162,7 @@ public interface UserControllerInterface {
                           responseCode = "200",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class),
+                                  schema = @Schema(implementation = ResponseApi.class),
                                   examples = @ExampleObject(
                                           name = "Sucesso",
                                           value = """
@@ -180,7 +181,7 @@ public interface UserControllerInterface {
                           responseCode = "404",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class)
+                                  schema = @Schema(implementation = ResponseApi.class)
                           )
                   ),
                   @ApiResponse(
@@ -197,7 +198,7 @@ public interface UserControllerInterface {
                   )
           }
   )
-  ResponseEntity<br.com.fiap.cozinha_inteligente.commons.ApiResponse<UserInfoDTO>> delete(String id);
+  ResponseEntity<ResponseApi<UserInfoDTO>> delete(String id);
 
   @Operation(
           description = "Altera a senha de um usuário",
@@ -209,7 +210,7 @@ public interface UserControllerInterface {
                           responseCode = "200",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class),
+                                  schema = @Schema(implementation = ResponseApi.class),
                                   examples = @ExampleObject(
                                           name = "Sucesso",
                                           value = """
@@ -228,7 +229,7 @@ public interface UserControllerInterface {
                           responseCode = "404",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class)
+                                  schema = @Schema(implementation = ResponseApi.class)
                           )
                   ),
                   @ApiResponse(
@@ -236,7 +237,7 @@ public interface UserControllerInterface {
                           responseCode = "400",
                           content = @Content(
                                   mediaType = "application/json",
-                                  schema = @Schema(implementation = br.com.fiap.cozinha_inteligente.commons.ApiResponse.class),
+                                  schema = @Schema(implementation = ResponseApi.class),
                                   examples = @ExampleObject(
                                           name = "Senha inválida",
                                           value = """
@@ -260,5 +261,5 @@ public interface UserControllerInterface {
                   )
           }
   )
-  ResponseEntity<br.com.fiap.cozinha_inteligente.commons.ApiResponse<Void>> updatePassword(String id, UpdatePasswordRequestDTO updatePassword);
+  ResponseEntity<ResponseApi<Void>> updatePassword(String id, UpdatePasswordRequestDTO updatePassword);
 }
