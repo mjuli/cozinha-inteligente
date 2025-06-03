@@ -1,6 +1,7 @@
 package br.com.fiap.cozinha_inteligente.dtos;
 
 import br.com.fiap.cozinha_inteligente.entities.Address;
+import br.com.fiap.cozinha_inteligente.enums.UserType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,6 +23,8 @@ public record UserRequestDTO(
   @Size(min = 6)
   @Schema(example = "password123")
   String password,
+  @Schema(example = "CUSTOMER")
+  UserType userType,
   @NotNull
   Address address
 ) {

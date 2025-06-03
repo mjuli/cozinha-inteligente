@@ -1,5 +1,6 @@
 package br.com.fiap.cozinha_inteligente.entities;
 
+import br.com.fiap.cozinha_inteligente.enums.UserType;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,6 +22,8 @@ public class User implements UserDetails {
   private String email;
   private String login;
   private String password;
+  @Enumerated(EnumType.STRING)
+  private UserType userType;
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "address_id")
   private Address address;

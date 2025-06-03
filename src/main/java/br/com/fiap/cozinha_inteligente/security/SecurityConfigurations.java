@@ -37,7 +37,6 @@ public class SecurityConfigurations {
               req.requestMatchers(HttpMethod.POST, "/login").permitAll();
               req.requestMatchers(HttpMethod.POST, "/users").permitAll();
               req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "swagger-ui/**").permitAll();
-              req.requestMatchers(HttpMethod.DELETE, "/users").hasRole("ADMIN");
               req.anyRequest().authenticated();
             })
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
