@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysql:3306/cozinha-inteligente?useSSL=false&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=America/Sao_Paulo
+    username: usr-cozinha-inteligente
+    password: 69~3Qgps+11
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: false
+server:
+  port: 8080
