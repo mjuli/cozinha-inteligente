@@ -2,7 +2,7 @@
 
 Sistema de gestão de restaurantes desenvolvido em Java (versão 21) com Spring Boot com gerenciamento de usuários.
 
-## Principais Características
+## 🎯 Principais Características
 
 - **API RESTful** completa e documentada
 - **Autenticação JWT** com tokens seguros
