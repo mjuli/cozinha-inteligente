@@ -77,7 +77,7 @@ POST   /login              # Autenticação de usuário
 ```http
 POST    /users                  # Cadastrar novo usuário
 PUT     /users/{id}             # Atualizar usuário
-DELETE  /users                  # Deletar usuário
+DELETE  /users/{id}             # Deletar usuário
 PATCH   /users/{id}/password    # Alteração de senha
 ```
 
